@@ -1,0 +1,127 @@
+/* ********** Frontpage */
+.front_page_background {
+  background-image: url("https://res.cloudinary.com/dozt7xeil/image/upload/v1676183637/gynecologybooks_nysgy8.webp");
+  background-color: #ffffff;
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth_btn {
+  background-color: #00aee3;
+  color: #fff;
+  padding: 10px;
+  width: auto;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.auth_btn:hover {
+  background-color: aquamarine;
+}
+
+.auth_background {
+  background-image: url("https://res.cloudinary.com/dozt7xeil/image/upload/v1676184414/gynecologybooks_auth_gl2dxe.webp");
+  background-color: #ffffff;
+  width: 100%;
+  height: auto !important;
+  min-height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+@media only screen and (min-width: 960px) {
+  .front_page_background {
+    background-image: url("https://res.cloudinary.com/dozt7xeil/image/upload/v1676698593/front_back_f5cmlc.webp");
+  }
+  .auth_background {
+    background-image: url("https://res.cloudinary.com/dozt7xeil/image/upload/v1676444827/auth_front_at9kqp.webp");
+    width: 100%;
+    height: auto !important;
+    min-height: 100vh;
+    background-position: center 1%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0 10%;
+  }
+}
+/* ****************** Login page */
+.password_input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eye_icon {
+  background-color: #ffffff;
+  padding: 5px;
+  border: none !important;
+}
+
+.login_form {
+  padding: 150px 10px 10px 10px;
+}
+.login_footer,
+.signup_footer {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 0;
+  align-items: center;
+}
+.forgot_link {
+  font-size: 20px;
+  color: #008000;
+  cursor: pointer;
+}
+
+/* *************** Sign up Form */
+
+.sign_up_form {
+  color: #000;
+  padding: 150px 10px 10px 10px;
+}
+.success {
+  color: #008000;
+  text-align: center;
+  font-weight: 700;
+  padding-top: 20px;
+}
+.error {
+  color: #ff0000;
+  text-align: center;
+  font-weight: 700;
+  padding-top: 20px;
+}
+
+.dr_name_input {
+  display: flex;
+  position: relative;
+}
+.dr_name_input span {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+}
+.dr_name_input_field {
+  padding-left: 35px !important;
+}
+
+/* ***************** Forgot Password */
+
+.forgotPassInput {
+  position: relative;
+}
+.forgotInput {
+  padding-left: 24px;
+}
+.atTheRate {
+  position: absolute;
+  top: 8px !important;
+  left: 5px;
+}
