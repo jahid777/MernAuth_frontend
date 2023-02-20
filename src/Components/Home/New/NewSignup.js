@@ -16,25 +16,24 @@ const NewSignup = () => {
   const emailRef = useRef();
   const addressRef = useRef();
   const passwordRef = useRef();
-  // const confirmPasswordRef = useRef();
 
   // sign with email and password
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const singupData = {
       name: nameRef.current.value,
       phoneNumber: phoneNumberRef.current.value,
       email: emailRef.current.value,
       address: addressRef.current.value,
       password: passwordRef.current.value,
-      // confirmPassword: confirmPasswordRef.current.value,
       active: true,
+      status: "logout",
     };
 
     // add product info at mongodb
     try {
-      setLoading(true);
-      const url = "https://server.gynecologybooks.org/addSignupData";
+      const url = "http://localhost:5000/addSignupData";
       const option = {
         method: "POST",
         body: JSON.stringify(singupData),
@@ -61,13 +60,6 @@ const NewSignup = () => {
           history.push("/login");
         }, 2000);
       }
-      //for password confirm
-      // if (passwordRef.current.value.length < 6) {
-      //   return setError("password must be at least 6 characters");
-      // }
-      // if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-      //   return setError("Password does not matched!");
-      // }
 
       //for input remove after data added
       if (data) {
@@ -76,14 +68,11 @@ const NewSignup = () => {
         emailRef.current.value = "";
         addressRef.current.value = "";
         passwordRef.current.value = "";
-        // confirmPasswordRef.current.value = "";
       }
     } catch (error) {
       console.log("err", error);
     }
-    setLoading(false);
   };
-
   return (
     <section className="auth_background">
       <div className="container sign_up_form">

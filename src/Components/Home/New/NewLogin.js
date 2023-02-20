@@ -18,9 +18,10 @@ const NewLogin = () => {
   // react router dom path detect and go there
   let history = useHistory();
 
-  // sign with email and password
+  // matching the password and send it to the sessionstroage then took the sessionStroage id for update status logout to login then want to findOne in the backend that password, number and if it is login then sessionStroage data seting and login(prive route login getting sesseion stroage data then inter)
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const info = {
       phoneNumber: phoneNumberRef.current.value,
       password: passwordRef.current.value,
@@ -30,13 +31,16 @@ const NewLogin = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `https://server.gynecologybooks.org/getAuthData?phoneNumber=${info?.phoneNumber}&password=${info?.password}`
+        `http://localhost:5000/getAuthData?phoneNumber=${
+          info?.phoneNumber
+        }&password=${info?.password}&status=${"login"}`
       );
       const data = await response.json();
       setLoginData(data);
-      if (!loginData.length) {
-        setError("login failed");
-      }
+
+      // if (!loginData.length) {
+      //   setError("login failed");
+      // }
     } catch (error) {
       console.log("err", error);
     }
@@ -48,6 +52,40 @@ const NewLogin = () => {
     if (loginData.length) {
       sessionStorage.setItem("data", JSON.stringify(loginData));
       history.push("/home");
+    }
+  }, [history, loginData]);
+
+  //status change after login successfully
+  useEffect(() => {
+    //getting the id from sessionStorage
+    const loginData = sessionStorage.getItem("data");
+    const dataObj = loginData ? JSON.parse(loginData)[0] : null;
+    const id = dataObj ? dataObj._id : null;
+
+    const status = {
+      value: "login",
+    };
+
+    async function updateUserStatus() {
+      try {
+        const response = await fetch(`http://localhost:5000/userStatus/${id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(status),
+        });
+        const result = await response.json();
+        if (result) {
+          console.log("updated successfully");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    if (id) {
+      updateUserStatus();
     }
   }, [history, loginData]);
 
