@@ -31,16 +31,20 @@ const NewLogin = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:5000/getAuthData?phoneNumber=${
-          info?.phoneNumber
-        }&password=${info?.password}&status=${"login"}`
+        `http://localhost:5000/getAuthData?phoneNumber=${info?.phoneNumber}&password=${info?.password}`
       );
       const data = await response.json();
-      setLoginData(data);
 
-      // if (!loginData.length) {
-      //   setError("login failed");
-      // }
+      //status ta shuddu logout thaklei login korte dibe
+      if (data[0].status === "logout") {
+        setLoginData(data);
+      } else {
+        setError("Please logged out from another device");
+      }
+
+      if (!loginData.length) {
+        setError("login failed");
+      }
     } catch (error) {
       console.log("err", error);
     }
@@ -87,7 +91,7 @@ const NewLogin = () => {
     if (id) {
       updateUserStatus();
     }
-  }, [history, loginData]);
+  }, [loginData]);
 
   //eye for password
   const handleToggle = () => {
